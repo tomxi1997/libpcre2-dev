@@ -50,6 +50,13 @@ jobs:
         export NDK_TOOLCHAIN=$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin
         export TARGET=${{ steps.vars.outputs.target }}
         export API=${{ steps.vars.outputs.api }}
+        export AR=$NDK_TOOLCHAIN/llvm-ar
+        export CC="$NDK_TOOLCHAIN/clang --target=$TARGET$API"
+        export AS=$CC
+        export CXX="$NDK_TOOLCHAIN/clang++ --target=$TARGET$API"
+        export LD=$NDK_TOOLCHAIN/ld
+        export RANLIB=$NDK_TOOLCHAIN/llvm-ranlib
+        export STRIP=$NDK_TOOLCHAIN/llvm-strip
 
         ./autogen.sh
         ./configure --host $TARGET --prefix=/data/sysroot
